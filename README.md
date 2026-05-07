@@ -9,7 +9,7 @@ Tech Stack:
 
 Run the app:
 mvn spring-boot:run
-Then open http://localhost:8080/login in your browser.
+- Then open http://localhost:8080/login in your browser.
 
 Pages:
 - Login - http://localhost:8080/login

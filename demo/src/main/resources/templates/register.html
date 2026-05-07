@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Register</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0f0f11;
+            --surface: #18181c;
+            --border: #2a2a30;
+            --accent: #c8f04a;
+            --text: #e8e8ea;
+            --muted: #6b6b72;
+            --error: #ff6b6b;
+            --success: #6bffb8;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 400px;
+            animation: fadeUp 0.4s ease;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .brand {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .alert-error {
+            background: rgba(255,107,107,0.1);
+            border: 1px solid rgba(255,107,107,0.3);
+            color: var(--error);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 0.4rem;
+        }
+
+        .hint {
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-top: -1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        input {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            padding: 0.7rem 1rem;
+            margin-bottom: 1.25rem;
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        input:focus { border-color: var(--accent); }
+
+        button {
+            width: 100%;
+            background: var(--accent);
+            color: #0f0f11;
+            border: none;
+            border-radius: 8px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 0.8rem;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.1s;
+            margin-top: 0.25rem;
+        }
+        button:hover  { opacity: 0.88; }
+        button:active { transform: scale(0.98); }
+
+        .footer-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+        .footer-link a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer-link a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="brand">Create account.</div>
+    <div class="subtitle">Get started in seconds</div>
+
+    <div th:if="${error}" class="alert-error" th:text="${error}"></div>
+
+    <form th:action="@{/register}" method="post">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username"
+               autocomplete="username" minlength="3" maxlength="50" required/>
+        <div class="hint">3–50 characters</div>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"
+               autocomplete="new-password" minlength="8" required/>
+        <div class="hint">Minimum 8 characters</div>
+
+        <button type="submit">Create Account</button>
+    </form>
+
+    <div class="footer-link">
+        Already have an account? <a th:href="@{/login}">Sign in</a>
+    </div>
+</div>
+</body>
+</html>

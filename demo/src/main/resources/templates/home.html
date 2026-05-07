@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #0f0f11;
+            --surface: #18181c;
+            --border: #2a2a30;
+            --accent: #c8f04a;
+            --text: #e8e8ea;
+            --muted: #6b6b72;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-brand {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.3rem;
+            color: var(--accent);
+        }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+
+        .logout-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            padding: 0.45rem 1rem;
+            cursor: pointer;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .logout-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            animation: fadeUp 0.5s ease;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .greeting {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+
+        .greeting span {
+            color: var(--accent);
+        }
+
+        .tagline {
+            color: var(--muted);
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        .badge {
+            display: inline-block;
+            margin-top: 2rem;
+            background: rgba(200, 240, 74, 0.08);
+            border: 1px solid rgba(200, 240, 74, 0.25);
+            color: var(--accent);
+            border-radius: 100px;
+            padding: 0.4rem 1rem;
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-brand">MyApp</div>
+    <div class="nav-user">
+        <span th:text="'Signed in as ' + ${username}"></span>
+        <form th:action="@{/logout}" method="post" style="margin:0">
+            <button type="submit" class="logout-btn">Sign Out</button>
+        </form>
+    </div>
+</nav>
+
+<main>
+    <div class="hero">
+        <div class="greeting">
+            Hello, <span th:text="${username}">User</span>.
+        </div>
+        <div class="tagline">You're successfully authenticated.</div>
+        <div class="badge">✓ Session active</div>
+    </div>
+</main>
+
+</body>
+</html>
